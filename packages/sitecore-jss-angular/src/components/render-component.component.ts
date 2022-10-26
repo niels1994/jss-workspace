@@ -33,10 +33,6 @@ import { isRawRendering } from './rendering';
   `,
 })
 export class RenderComponentComponent implements OnChanges {
-  private _inputs: { [key: string]: unknown };
-  private _differ: KeyValueDiffer<string, unknown>;
-  private destroyed = false;
-
   @Input() rendering: ComponentRendering | HtmlElementRendering;
   @Input() outputs: { [k: string]: (eventType: unknown) => void };
   @ViewChild('view', { read: ViewContainerRef, static: true }) private view: ViewContainerRef;
@@ -48,6 +44,10 @@ export class RenderComponentComponent implements OnChanges {
       this._differ = this.differs.find(value).create();
     }
   }
+
+  private _inputs: { [key: string]: unknown };
+  private _differ: KeyValueDiffer<string, unknown>;
+  private destroyed = false;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,

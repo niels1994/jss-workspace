@@ -1,11 +1,11 @@
 import {
+  Compiler,
   ComponentFactory,
   Inject,
   Injectable,
   Injector,
-  Type,
-  Compiler,
   NgModuleFactory,
+  Type,
 } from '@angular/core';
 import { ComponentRendering, HtmlElementRendering } from '@sitecore-jss/sitecore-jss/layout';
 import {
@@ -45,18 +45,6 @@ export class JssComponentFactoryService {
     if (this.lazyComponents) {
       this.lazyComponents.forEach((c) => this.lazyComponentMap.set(c.path, c));
     }
-  }
-
-  private loadModuleFactory(
-    lazyComponent: ComponentNameAndModule
-  ): Promise<NgModuleFactory<unknown>> {
-    return lazyComponent.loadChildren().then((loaded) => {
-      if (loaded instanceof NgModuleFactory) {
-        return loaded;
-      } else {
-        return this.compiler.compileModuleAsync(loaded);
-      }
-    });
   }
 
   getComponent(component: ComponentRendering): Promise<ComponentFactoryResult> {
@@ -119,6 +107,18 @@ export class JssComponentFactoryService {
         isRawRendering(component) ? this.getRawComponent(component) : this.getComponent(component)
       )
     );
+  }
+
+  private loadModuleFactory(
+    lazyComponent: ComponentNameAndModule
+  ): Promise<NgModuleFactory<unknown>> {
+    return lazyComponent.loadChildren().then((loaded) => {
+      if (loaded instanceof NgModuleFactory) {
+        return loaded;
+      } else {
+        return this.compiler.compileModuleAsync(loaded);
+      }
+    });
   }
 
   private getRawComponent(component: HtmlElementRendering): Promise<ComponentFactoryResult> {
