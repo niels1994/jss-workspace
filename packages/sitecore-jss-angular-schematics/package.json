@@ -10,7 +10,7 @@
     "generate-docs": "npx typedoc --plugin typedoc-plugin-markdown --readme none --out ../../ref-docs/sitecore-jss-angular-schematics src/jss-component/index.ts --githubPages false"
   },
   "engines": {
-    "node": ">=12",
+    "node": ">=14",
     "npm": ">=6"
   },
   "author": {
@@ -24,9 +24,9 @@
   },
   "schematics": "./src/collection.json",
   "dependencies": {
-    "@angular-devkit/core": "~12.2.0",
-    "@angular-devkit/schematics": "~12.2.0",
-    "@schematics/angular": "~12.2.0",
+    "@angular-devkit/core": "~13.3.0",
+    "@angular-devkit/schematics": "~13.3.0",
+    "@schematics/angular": "~13.3.0",
     "chalk": "^2.4.2"
   },
   "devDependencies": {
@@ -34,7 +34,7 @@
     "@types/node": "^12.7.8",
     "jasmine": "^2.99.0",
     "nyc": "^15.1.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.6.2"
   },
   "gitHead": "2f4820efddf4454eeee58ed1b2cc251969efdf5b"
 }
