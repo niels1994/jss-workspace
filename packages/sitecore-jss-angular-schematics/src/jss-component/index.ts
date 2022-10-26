@@ -20,13 +20,17 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
+import { parseName } from '@schematics/angular/utility/parse-name';
+import { validateHtmlSelector } from '@schematics/angular/utility/validation';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 import { ProjectType } from '@schematics/angular/utility/workspace-models';
-import { parseName } from '@schematics/angular/utility/parse-name';
-import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
 import chalk from 'chalk';
 import { Schema as ComponentOptions } from './schema';
 
+/**
+ * @param options
+ * @param projectPrefix
+ */
 function buildSelector(options: ComponentOptions, projectPrefix?: string) {
   let selector = strings.dasherize(options.name);
   if (options.prefix) {
@@ -38,6 +42,9 @@ function buildSelector(options: ComponentOptions, projectPrefix?: string) {
   return selector;
 }
 
+/**
+ * @param options
+ */
 export default function(options: ComponentOptions) {
   return async (host: Tree) => {
     const workspace = await getWorkspace(host);
@@ -66,7 +73,6 @@ export default function(options: ComponentOptions) {
     options.path = parsedPath.path;
     options.selector = options.selector || buildSelector(options, project?.prefix);
 
-    validateName(options.name);
     validateHtmlSelector(options.selector);
 
     const sources: Rule[] = [];
