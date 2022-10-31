@@ -24,6 +24,7 @@
     "url": "https://github.com/sitecore/jss/issues"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~13.3.0",
     "@angular-eslint/eslint-plugin": "~13.3.0",
     "@angular/cli": "~13.3.9",
     "@angular/common": "~13.3.0",
